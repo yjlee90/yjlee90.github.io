@@ -39,15 +39,13 @@ Last 4096 bytes of stderr :
 ```
 
 - 해결방법
-`hadoop-env.sh`파일 수정
+`hadoop-env.sh`파일 수정  
+
 ```shell
 # JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java -> 주석처리
 
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
 ```
-
-
-
 
 - Spark Job 테스트  
 Hadoop - Spark 연동을 확인하기 위해서 간단한 example spark job을 submit 한다.
