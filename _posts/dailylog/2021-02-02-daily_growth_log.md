@@ -31,6 +31,7 @@ tags:
 
 - Container 내 JAVA_HOME PATH 설정 오류
 - Log 메세지
+
 ```
 [2021-02-02 02:20:46.014]Container exited with a non-zero exit code 127. Error file: prelaunch.err.
 Last 4096 bytes of prelaunch.err :
@@ -46,6 +47,8 @@ Last 4096 bytes of stderr :
 
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
 ```
+
+
 
 - Spark Job 테스트  
 Hadoop - Spark 연동을 확인하기 위해서 간단한 example spark job을 submit 한다.
