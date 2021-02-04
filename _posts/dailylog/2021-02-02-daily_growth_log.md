@@ -51,13 +51,13 @@ export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
 Hadoop - Spark 연동을 확인하기 위해서 간단한 example spark job을 submit 한다.
 
 ``` shell
- spark-submit –class org.apache.spark.examples.SparkPi \
- –master yarn \
- –deploy-mode cluster \
- –driver-memory 4g \
- –executor-memory 2g \
- –executor-cores 1 \
- ${SPARK_HOME}/examples/jars/spark-examples*.jar
+spark-submit –class org.apache.spark.examples.SparkPi \
+–master yarn \
+–deploy-mode cluster \
+–driver-memory 4g \
+–executor-memory 2g \
+–executor-cores 1 \
+${SPARK_HOME}/examples/jars/spark-examples*.jar
 
 
 spark-submit --class org.apache.spark.examples.SparkPi \
@@ -67,20 +67,17 @@ spark-submit --class org.apache.spark.examples.SparkPi \
 --executor-memory 512m \
 --executor-cores 1 \
 ${SPARK_HOME}/examples/jars/spark-examples*.jar 10
-
-
 ```
 
 - SPARK java 경로 error
 `spark-env.sh` 에서 JAVA_HOME을 절대경로로 변경한다.
+
 ```shell
 # spark-env.sh
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 ```
 
-
 - SPARK Sesscion 
-
 ```java
 2021-02-02 06:43:13,124 ERROR repl.Main: Failed to initialize Spark session.
 org.apache.hadoop.ipc.RemoteException(java.io.IOException): File /user/hadoop/.sparkStaging/application_1612247239787_0001/__spark_libs__675299795277147897.zip could only be written to 0 of the 1 minReplication nodes. There are 3 datanode(s) running and 3 node(s) are excluded in this operation.
