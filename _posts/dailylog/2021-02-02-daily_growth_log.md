@@ -62,7 +62,6 @@ spark-submit –class org.apache.spark.examples.SparkPi \
 –executor-cores 1 \
 ${SPARK_HOME}/examples/jars/spark-examples*.jar
 
-
 spark-submit --class org.apache.spark.examples.SparkPi \
 --master yarn-client \
 --num-executors 1 \
@@ -80,41 +79,7 @@ ${SPARK_HOME}/examples/jars/spark-examples*.jar 10
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 ```
 
-- SPARK Sesscion 
-```java
-2021-02-02 06:43:13,124 ERROR repl.Main: Failed to initialize Spark session.
-org.apache.hadoop.ipc.RemoteException(java.io.IOException): File /user/hadoop/.sparkStaging/application_1612247239787_0001/__spark_libs__675299795277147897.zip could only be written to 0 of the 1 minReplication nodes. There are 3 datanode(s) running and 3 node(s) are excluded in this operation.
-at org.apache.hadoop.hdfs.server.blockmanagement.BlockManager.chooseTarget4NewBlock(BlockManager.java:2278)
-at org.apache.hadoop.hdfs.server.namenode.FSDirWriteFileOp.chooseTargetForNewBlock(FSDirWriteFileOp.java:294)
-at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.getAdditionalBlock(FSNamesystem.java:2808)
-at org.apache.hadoop.hdfs.server.namenode.NameNodeRpcServer.addBlock(NameNodeRpcServer.java:905)
-at org.apache.hadoop.hdfs.protocolPB.ClientNamenodeProtocolServerSideTranslatorPB.addBlock(ClientNamenodeProtocolServerSideTranslatorPB.java:577)
-at org.apache.hadoop.hdfs.protocol.proto.ClientNamenodeProtocolProtos$ClientNamenodeProtocol$2.callBlockingMethod(ClientNamenodeProtocolProtos.java)
-at org.apache.hadoop.ipc.ProtobufRpcEngine$Server$ProtoBufRpcInvoker.call(ProtobufRpcEngine.java:528)
-at org.apache.hadoop.ipc.RPC$Server.call(RPC.java:1086)
-at org.apache.hadoop.ipc.Server$RpcCall.run(Server.java:1029)
-at org.apache.hadoop.ipc.Server$RpcCall.run(Server.java:957)
-at java.security.AccessController.doPrivileged(Native Method)
-at javax.security.auth.Subject.doAs(Subject.java:422)
-at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1762)
-at org.apache.hadoop.ipc.Server$Handler.run(Server.java:2957)
-at org.apache.hadoop.ipc.Client.call(Client.java:1475)
-at org.apache.hadoop.ipc.Client.call(Client.java:1412)
-at org.apache.hadoop.ipc.ProtobufRpcEngine$Invoker.invoke(ProtobufRpcEngine.java:229)
-at com.sun.proxy.$Proxy15.addBlock(Unknown Source)
-at org.apache.hadoop.hdfs.protocolPB.ClientNamenodeProtocolTranslatorPB.addBlock(ClientNamenodeProtocolTranslatorPB.java:418)
-at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-at java.lang.reflect.Method.invoke(Method.java:498)
-at org.apache.hadoop.io.retry.RetryInvocationHandler.invokeMethod(RetryInvocationHandler.java:191)
-at org.apache.hadoop.io.retry.RetryInvocationHandler.invoke(RetryInvocationHandler.java:102)
-at com.sun.proxy.$Proxy16.addBlock(Unknown Source)
-at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.locateFollowingBlock(DFSOutputStream.java:1455)
-at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.nextBlockOutputStream(DFSOutputStream.java:1251)
-at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.run(DFSOutputStream.java:448)
-```
-
+- SPARK Session
 
 ```java
 org.apache.hadoop.ipc.RemoteException(java.io.IOException): File /user/hadoop/.sparkStaging/application_1612247239787_0001/__spark_libs__675299795277147897.zip could only be written to 0 of the 1 minReplication nodes. There are 3 datanode(s) running and 3 node(s) are excluded in this operation.
@@ -137,16 +102,17 @@ rm -rf /data/hd-cluster/data/*
 
         
 - Dynamic Allocation 설정 에러
+
 ```java
 Exception in thread "main" org.apache.spark.SparkException: Dynamic allocation of executors requires the external shuffle service. You may enable this through spark.shuffle.service.enable
 ```
 
 `spark-defaults.conf`
+
 ```
 spark.shuffle.service.enable true
 ```
 
-    - Hadoop - Spark Dya
 
 - Zeppelin 설치
     - PySpark를 할 때에 Worker에 python 설정이 되어 있어야 한다.
@@ -176,20 +142,21 @@ sudo update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 1
     - file 
 
     - references
-    https://www.eginnovations.com/blog/server-performance-monitoring/
-    https://www.monitis.com/blog/essential-server-performance-metrics-you-should-know-but-were-reluctant-to-ask/
-    https://raygun.com/blog/server-performance-metrics/
+    > https://www.eginnovations.com/blog/server-performance-monitoring/
+    > https://www.monitis.com/blog/essential-server-performance-metrics-you-should-know-but-were-reluctant-to-ask/
+    > https://raygun.com/blog/server-performance-metrics/
 
 
 ## 02.04
 - Server Performance Monitoring 지표
 - PySpark 연결
 - Elastic Search 인덱스 설계 방향
-- Metric Beats에서 수집하고 있는 데이터에 대한 분석이 필요함.
+- Metric Beats에서 수집하고 있는 데이터에 대한 분석이 필요함.  
 
-
+<br/>  
 
 - 참고 자료
 [CPU 프로파일링 /proc/stat python 프로그램](https://jeongchul.tistory.com/613)
 [Disk I/O 모니터링을 위한 iostat 명령어 활용법](https://m.blog.naver.com/bumsukoh/221022044759)
 [리눅스 I/O 트러블 슈팅(I/O Trouble Shooting)](https://m.blog.naver.com/skddms/221606572303)
+
