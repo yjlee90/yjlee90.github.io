@@ -112,19 +112,22 @@ at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.nextBlockOutputStream(DFS
 at org.apache.hadoop.hdfs.DFSOutputStream$DataStreamer.run(DFSOutputStream.java:448)
 ```
 
+
 ```java
 org.apache.hadoop.ipc.RemoteException(java.io.IOException): File /user/hadoop/.sparkStaging/application_1612247239787_0001/__spark_libs__675299795277147897.zip could only be written to 0 of the 1 minReplication nodes. There are 3 datanode(s) running and 3 node(s) are excluded in this operation.
 ```
 
 
-
 1. hdfs namenode -format
 2. /tmp/hadoop-hadoop/data를 지움
+
 ```
 sudo rm -R /tmp/*
 ```
+
 3. hdfs datanode -format
 4. 모든 데이터 노드 내 data 폴더 내 파일 제거(최후의 방법)
+
 ```
 rm -rf /data/hd-cluster/data/*
 ```
