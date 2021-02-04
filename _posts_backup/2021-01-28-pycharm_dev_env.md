@@ -37,13 +37,6 @@ tags:
     - Pycharm Pro (Community 버전은 되는 지 확인 안해봄)
     
 
-
-
-
-
-
-    
-
 ## 2. Remote server 준비사항
     - Python
     - SSH
