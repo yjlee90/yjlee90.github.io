@@ -1,10 +1,10 @@
 ---
 layout:     post
-title:      "2021/02 GrowthLog"
+title:      "2021.02 GrowthLog"
 subtitle:   ""
 date:       2021-01-28 15:30:00
 author:     "YooJong"
-header-img: "img/post-bg-web.jpg"
+header-img: "img/post-bg-nfinityjpg"
 catalog: true
 tags:
     - 2021 
