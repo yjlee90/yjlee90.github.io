@@ -149,7 +149,7 @@ sudo update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 1
 
 ## 02.04
 - Server Performance Monitoring 지표
-- PySpark 연결
+- PySpark 연결 완료 
 - Elastic Search 인덱스 설계 방향
 - Metric Beats에서 수집하고 있는 데이터에 대한 분석이 필요함.  
 
@@ -200,8 +200,6 @@ Logical memory > Physical Memory를 가능하게 하는 것이 Virtual Address, 
 - Demanding Page
 실제로 필요한 Page만 물리메모리로 가져오는 방식
 필요 Page에 접근하기 위해서 가상 메모리 주소에 대응하는 물리 메모리 주소를 찾아내야함. 
-
-
 
 
 [Linux Kernel 5 - Virtual Memory & Paging](https://pr0gr4m.tistory.com/entry/Linux-Kernel-5-Virtual-Memory-Paging)
@@ -269,7 +267,6 @@ CPU에 영향을 주는 하드웨어를 수정하거나 시스템을 업그레�
 
 
 **softirq**
-
 - `system.cpu.softirq.norm.pct`
 - `system.cpu.softirq.pct`
 - `system.cpu.softirq.ticks`
@@ -365,6 +362,14 @@ idle time은 높으나 nice time 이 높다면 background process가 있는 것�
 - `system.cpu.system.pct`
 - `system.cpu.system.ticks`
 
+시스템(커널)에 의해서 사용되는 CPU 시간의 비율
+
+**user**
+- `system.cpu.user.norm.pct`
+- `system.cpu.user.pct`
+- `system.cpu.user.ticks`
+
+시스템(커널)에서 사용하는 프로세스를 제외한 사용자 어플리케이션에 의해 사용되는 CPU 비율 
 
 **total**
 
@@ -379,15 +384,6 @@ calculateTotalPct := func() float64 {
 		return common.Round(float64(numCPU)-idle, common.DefaultDecimalPlacesCount)
 	}
 ```
-[Metric beats CPU source code](https://github.com/elastic/beats/blob/c0bfea48abb66eccc671a1802cd330cbbfe8fa56/libbeat/metric/system/cpu/cpu.go)
-
-
-**user**
-
-
-- `system.cpu.user.norm.pct`
-- `system.cpu.user.pct`
-- `system.cpu.user.ticks`
 
 
 **참조**
@@ -400,12 +396,10 @@ calculateTotalPct := func() float64 {
 [Accurate calculation of CPU usage given in percentage in Linux?](https://stackoverflow.com/questions/23367857/accurate-calculation-of-cpu-usage-given-in-percentage-in-linux)
 
 
+---
 
-**Metric Beats Source Code 분석**
-```
-// The CPU percentages are divided by given numCPU value and rounded
-// using Round.
-```
+##### Metric Beats Source Code 분석
+- [Metric beats CPU source code](https://github.com/elastic/beats/blob/c0bfea48abb66eccc671a1802cd330cbbfe8fa56/libbeat/metric/system/cpu/cpu.go)
 
 **normalized**
 ```go
@@ -416,6 +410,8 @@ func (m *Metrics) NormalizedPercentages() Percentages {
 
 **percentage**
 ```go
+// The CPU percentages are divided by given numCPU value and rounded
+// using Round.
 func cpuPercentages(s0, s1 *sigar.Cpu, numCPU int) Percentages {
 	if s0 == nil || s1 == nil {
 		return Percentages{}
@@ -459,3 +455,14 @@ func cpuPercentages(s0, s1 *sigar.Cpu, numCPU int) Percentages {
 // range from [0, 100%].
 func (m *CoreMetrics) Percentages() Percentages { return (*Metrics)(m).NormalizedPercentages() }
 ```
+
+
+metric beats에서 사용하는 sigar.Cpu -> Sigar 이라는 Java Library 파생을 사용하는 것 같다.
+
+Sigar API
+[Sigar github repository](https://github.com/hyperic/sigar)
+
+
+TODO
+- [ ] ticks 의미 찾기
+- [ ] User section 조사하기
