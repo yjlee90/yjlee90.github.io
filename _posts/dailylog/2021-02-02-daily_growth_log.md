@@ -207,10 +207,12 @@ Logical memory > Physical Memory를 가능하게 하는 것이 Virtual Address, 
 [Linux Kernel 5 - Virtual Memory & Paging](https://pr0gr4m.tistory.com/entry/Linux-Kernel-5-Virtual-Memory-Paging)
 
 
+---
+
 ## 02.08
 
 #### CPU Metric 항목 분석
-##### 항목
+**항목**
 - cores
 - idle
 - iowait
@@ -222,45 +224,34 @@ Logical memory > Physical Memory를 가능하게 하는 것이 Virtual Address, 
 - total
 - user
 
-##### cores
-- 변수 이름 `system.cpu.cores`
-- 의미  
-    - 해당 서버의 Core 갯수
+**cores**
+-  `system.cpu.cores`  
+- 해당 서버의 Core 갯수
 
-##### idle
+**idle**
 
-- 변수 
-`system.cpu.idle.norm.pct`  
-`system.cpu.idle.pct`  
-`system.cpu.idle.ticks`  
-
-
-- 의미
+- `system.cpu.idle.norm.pct`  
+- `system.cpu.idle.pct`  
+- `system.cpu.idle.ticks`  
 
 CPU가 모든 일을 끝내고 쉬고 있는 시간을 의미한다. 
 I/O wait 또는 Steal 등의 값으로 인해서 USage와의 관계가 일치하지는 않다.
 
-##### iowait 
+**iowait**
 
-- 변수 
+- `system.cpu.iowait.norm.pct`
+- `system.cpu.iowait.pct`
+- `system.cpu.iowait.ticks`
 
-system.cpu.iowait.norm.pct
-system.cpu.iowait.pct
-system.cpu.iowait.ticks
-
-- 의미
-
-CPU가 입출력을 대기하는데 사용하는 시간의 비율 
-프로세스에 바로 접근 할 수 없는 상황의 경우 
+CPU가 입출력을 대기하는데 사용하는 시간의 비율, 프로세스에 바로 접근 할 수 없는 상황의 경우 
 
 
-##### irq 
+**irq**
 
-system.cpu.irq.norm.pct
-system.cpu.irq.pct
-system.cpu.irq.ticks
+- `system.cpu.irq.norm.pct`
+- `system.cpu.irq.pct`
+- `system.cpu.irq.ticks`
 
-- 의미
 Kernel 레벨에서 interrupt request가 얼마나 있는 지 .
 컴퓨터의 주변기기와 데이터와 신호를 주고 받으며 보드에서 일어나는 모든 일을 관장한다. 
 주변기기들이 어떠한 일을 하게 되면 주변 기기는 CPU에게 이러한 사실을 알려주어야 한다. 
@@ -277,14 +268,14 @@ IRQ 값이 크다면 네트워크나 드라이브 같은 하드웨어를 처리�
 CPU에 영향을 주는 하드웨어를 수정하거나 시스템을 업그레이드 해야함
 
 
-##### softirq 
+**softirq**
 
-system.cpu.softirq.norm.pct
-system.cpu.softirq.pct
-system.cpu.softirq.ticks
+- `system.cpu.softirq.norm.pct`
+- `system.cpu.softirq.pct`
+- `system.cpu.softirq.ticks`
 
 
-##### Interrupt
+**Interrupt**
 프로그램 실행하는 도중에 예기치 않은 상황이 발생한 경우 현재 실행중인 작업을 즉시 중단하고 발생된 상황을 우선 처리한 후 
 실행중이던 작업으로 복귀하여 계속 처리하는 것을 말한다. 외부, 내부, 소프트웨어 인터럽트로 구분한다.
 
@@ -306,13 +297,11 @@ system.cpu.softirq.ticks
 IRQ(Interrupt ReQuest)
 IRQ가 높다는 것은 인터럽트 발생 건수가 많다는 것?
 
-##### nice 
+**nice**
 
-system.cpu.nice.norm.pct
-system.cpu.nice.pct  
-system.cpu.nice.ticks  
-
-- 의미  
+- `system.cpu.nice.norm.pct`
+- `system.cpu.nice.pct`
+- `system.cpu.nice.ticks`
 
 TOP에서 보이는 nice의 의미
 CPU 스케쥴링 우선순위 
@@ -332,30 +321,26 @@ idle time은 높으나 nice time 이 높다면 background process가 있는 것�
 
 
 
-##### steal 
+**steal**
 
-- 변수 
-
-system.cpu.steal.norm.pct
-system.cpu.steal.pct
-system.cpu.steal.ticks
-
-- 의미
+- `system.cpu.steal.norm.pct`
+- `system.cpu.steal.pct`
+- `system.cpu.steal.ticks`
 
 클라우드 서비스와 물리 서버 환경의 차이에서 발생하는 대표적인 지표. CPU steal time은 가상화된 자원을 분배하는 과정에서 cpu의 자원을 얼마나 빼앗기고 있는 지 알려주는 지표. 하이퍼바이저가 다른 가상 프로세서를 서비스하는 동안 가상 CPU가 실제 CPU를 기다리는 시간을 백분율로 표시한 값. 가상 환경에서 동작하는 VM은 단일 호스트에 있는 다른 인스턴스와 리소스를 공유함. 
 
 > 가상화 환경이 아닌 경우에는 CPU Steal Time은 아무런 의미를 갖지 않는다.
 
-**발생원인**
+발생원인
 
 - VM이 올라가 있는 물리장비의 자원이 처음부터 부족하거나 물리 장비의 자원은 충분하나 VM이 할당받은 CPU자원이 부족한 경우. 
 
-**장애현상**
+장애현상
 
 - 배치와 같은 백그라운드 작업은 오래 걸릴 뿐
 - 웹 어플리케이션과 같은 실시간 처리는 성능이 감소 -> 실시간 요청 처리 실패 -> 서비스 장
 
-**해결방법**
+해결방법
 
 벤더사   
 - 리소스의 제한 설정을 조절. 특정 서버에서 실행되는 VM 자원 사용률에 대한 설정 조절  
@@ -369,22 +354,22 @@ system.cpu.steal.ticks
 
 <br/>
 
-- 참조
-[CPU Steal Time의 원인과 대책](https://www.whatap.io/ko/blog/25/)
+참조
+- [CPU Steal Time의 원인과 대책](https://www.whatap.io/ko/blog/25/)
 
 
 
-##### system 
+**system**
 
-system.cpu.system.norm.pct
-system.cpu.system.pct
-system.cpu.system.ticks
+- `system.cpu.system.norm.pct`
+- `system.cpu.system.pct`
+- `system.cpu.system.ticks`
 
 
-##### total 
+**total**
 
-system.cpu.total.norm.pct
-system.cpu.total.pct
+- `system.cpu.total.norm.pct`
+- `system.cpu.total.pct`
 
 ```go
 # line 112
@@ -397,26 +382,26 @@ calculateTotalPct := func() float64 {
 [Metric beats CPU source code](https://github.com/elastic/beats/blob/c0bfea48abb66eccc671a1802cd330cbbfe8fa56/libbeat/metric/system/cpu/cpu.go)
 
 
-##### user 
+**user**
 
 
-system.cpu.user.norm.pct
-system.cpu.user.pct
-system.cpu.user.ticks
+- `system.cpu.user.norm.pct`
+- `system.cpu.user.pct`
+- `system.cpu.user.ticks`
 
 
-##### 참조
+**참조**
 [https://brunch.co.kr/@leedongins/75](https://brunch.co.kr/@leedongins/75)   
 [Metric beats CPU source code](https://github.com/elastic/beats/blob/c0bfea48abb66eccc671a1802cd330cbbfe8fa56/libbeat/metric/system/cpu/cpu.go)
 
 
-##### Time Calculation
+**Time Calculation**
 
 [Accurate calculation of CPU usage given in percentage in Linux?](https://stackoverflow.com/questions/23367857/accurate-calculation-of-cpu-usage-given-in-percentage-in-linux)
 
 
 
-##### Metric Beats Source Code 분석
+**Metric Beats Source Code 분석**
 ```
 // The CPU percentages are divided by given numCPU value and rounded
 // using Round.
