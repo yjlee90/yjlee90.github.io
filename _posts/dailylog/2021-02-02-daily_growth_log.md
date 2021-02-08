@@ -1,5 +1,6 @@
---- layout:     post
-title:      "2021.02 GrowthLog"
+---
+layout:    post
+title:     "2021.02 GrowthLog"
 subtitle:   ""
 date:       2021-01-28 15:30:00
 author:     "YooJong"
