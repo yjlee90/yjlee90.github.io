@@ -160,3 +160,51 @@ sudo update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 1
 [Disk I/O 모니터링을 위한 iostat 명령어 활용법](https://m.blog.naver.com/bumsukoh/221022044759)
 [리눅스 I/O 트러블 슈팅(I/O Trouble Shooting)](https://m.blog.naver.com/skddms/221606572303)
 
+
+
+## 02.05
+- 기존 수집 Metric에 대한 조사 분석
+- Memory
+
+- HugePage
+컴퓨팅에서 가상 메모리는 메모리 관리 기술이다. 스토리지 자원을 활용해서 가상의 큰 메모리를 사용하는 것처럼 바꾼다. 
+OS에서는 프로그램에서 사용해야하는 가상 주소(Virtual Address)를 실제 물리 주소(Physical address)와 맵핑하는 작업을 대신 해준다. 여기에서 
+여기에서 스ㅌ
+
+- Paging
+메모리 관리 기술 중에 하나이다.  운영체제는 페이지라는 동일크기의 블록을 보조 저장소에서 데이터를 
+페이징은 프로그램이 사용 가능한 실제 메모리의 크기를 초과하도록 보조 저장소를 사용하여 
+
+프로세스는 자신만의 가상 주소 공간을 가지고 있다.
+32bit/64bit -> 최대 4GB/16EB의 주소 공간을 가진다.
+
+특정 프로세스 내에서 쓰레드가 수행될 때 해당 쓰레드는 프로세스가 소유하고 있는 메모리에 대해서만 접근 가능
+A 프로세세스가 0x12345678 주소에 무언가를 저장하였지만  B 프로세스도 0x12345678에 저장 될 수 있ㅇ음
+
+Logical memory > Physical Memory를 가능하게 하는 것이 Virtual Address, Viru
+
+Demanding-Paging 기법
+
+디스크 공간을 메모리처럼 활용할 수 있음
+디스크 상에 존재하는 이러한 파일을 Paging file (swap file)이라고 하며
+모든 프로세세스가 사용할 수 있는 가상 메모리로 사용 된다.
+
+Hard swap
+- 페이징 파일에서 실제 물리 메모리로 올리고 내리리고 하는 일련의 
+
+
+- Page
+> 가상메모리를 사용하는 최소 크기 단위
+> 윈도우 운영체제 4096(4KB)의 페이지 크기를 사용한다.
+
+페이징 파일에서 물리 메모리로 데이터를 로드 할 때, 아무 위치에 각자가 필요한 용량 만큼 올린다면
+메모리 공간에 아무도 쓸 수 없는  짜투리 공간이 발생하게 된다. 이를 막기 위해서 Page라는 최소 크기 단위를 만듬
+
+- Demanding Page
+실제로 필요한 Page만 물리메모리로 가져오는 방식
+필요 Page에 접근하기 위해서 가상 메모리 주소에 대응하는 물리 메모리 주소를 찾아내야함. 
+
+
+
+
+[Linux Kernel 5 - Virtual Memory & Paging](https://pr0gr4m.tistory.com/entry/Linux-Kernel-5-Virtual-Memory-Paging)
