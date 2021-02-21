@@ -354,3 +354,260 @@ LockedHint=no
 
 
 
+## 02.16
+- Memery Metric 분석
+- Network metric 분석
+- Process Metric 분석
+
+## 02.17
+- DiskIO Metric 분석
+
+```json
+{
+    "@timestamp": "2017-10-12T08:05:34.853Z",
+    "event": {
+        "dataset": "system.diskio",
+        "duration": 115000,
+        "module": "system"
+    },
+    "metricset": {
+        "name": "diskio",
+        "period": 10000
+    },
+    "service": {
+        "type": "system"
+    },
+    "system": {
+        "diskio": {
+            "io": {
+                "time": 1296
+            },
+            "iostat": {
+                "await": 0,
+                "busy": 0,
+                "queue": {
+                    "avg_size": 0
+                },
+                "read": {
+                    "await": 0,
+                    "per_sec": {
+                        "bytes": 0
+                    },
+                    "request": {
+                        "merges_per_sec": 0,
+                        "per_sec": 0
+                    }
+                },
+                "request": {
+                    "avg_size": 0
+                },
+                "service_time": 0,
+                "write": {
+                    "await": 0,
+                    "per_sec": {
+                        "bytes": 0
+                    },
+                    "request": {
+                        "merges_per_sec": 0,
+                        "per_sec": 0
+                    }
+                }
+            },
+            "name": "sda6",
+            "read": {
+                "bytes": 335872,
+                "count": 82,
+                "time": 1296
+            },
+            "write": {
+                "bytes": 0,
+                "count": 0,
+                "time": 0
+            }
+        }
+    }
+}
+```
+
+### Disk Performance Concept
+
+Measuring Time
+
+![measuring time](https://mblogthumb-phinf.pstatic.net/MjAxNzA2MDVfMTkx/MDAxNDk2NjM4MDY1ODI3.FB2LmjUQnpFniHqA3fx7LM8O76XL_UzycX4tLKfzCLMg.HfVlIhKEIFCR22HFCabej5NInE8QYbgJauIViu5_mJQg.PNG.bumsukoh/image.png?type=w800)
+
+
+![Disk Queue](https://www.whatap.io/ko/blog/img/41/queue_length.webp)
+
+
+tps
+- 디스크 장치에서 초당 처리한 입출력의 작업 갯수
+
+1. name
+1. io.time
+    - total number of time spent
+2. iostat.await
+   - 평균 시간 request가 디스크에 issued 될 때까지 특정 디바이스에
+3. iostat.queue.avg_size
+   - 
+
+
+4. iostat.read.await
+ 
+5. iostat.read.per_sec.bytes
+    - total
+6. iostat.read.request.merges_per_sec
+7. iostat.read.request.per_sec
+
+8.  iostat.request.avg_size
+9.  iostat.service_time
+
+10. iostat.write.await
+11. iostat.write.per_sec.bytes
+12. iostat.write.request.merges_per_sec
+13. iostat.write.request.per_sec
+
+14. read.bytes
+    - 디스크 장치에서 초당 
+15. read.count
+16. read.time
+
+
+17. write.bytes
+18. write.count
+19. write.time
+
+
+20초
+DID
+
+
+[Source Code - DiskIO](https://github.com/elastic/beats/blob/master/metricbeat/module/system/diskio/diskio.go)
+
+
+
+### 현실적 DiskIO로 인한 병목 현상 발생시 해결방안 
+
+1. Application Level에서의 불필요한 Disk I/O 발생하는 지 점검(Log level 등)
+2. OS에서 제공하는 파라미터 튜닝을 통한 개선(Disk Queueing Algorithm 변경)
+    - linux에서 Noop, Deadline, Anitcipactory, CFQ등 write로 인한 read 지연을 개선 할 수 있음
+3. Disk 분산을 통한 I/O Bandwidth 개선
+    - I/O가 편준되는 FileSystem에 대해서 Volume을 물리적으로 여러 Disk로 분산하여 재구성한다. 
+4. 
+
+
+참조
+- [Disk I/O 모니터링을 위한 iostat 명령어 활용](https://m.blog.naver.com/bumsukoh/221022044759)
+
+
+
+
+
+## 02.18
+- Load 메트릭 분석
+- Filesystem 메트릭 분석
+
+
+filesystem
+
+여러 개의 물리적 Disk를 가지며 각 Disk는 하나 이상의 filesystem을 갖는다.
+Kernel은 논리적 수준에서는 DIsk가 아니라 Filesystem을 다루며 file system
+논리적 Device를 다룬다. 
+
+File - 어떤 정보의 모임, 보통 보조기억장치(디스크)에 저장됨 
+Filesystem - File들의 집합이 적절한 형태로 구성되어 있는 것
+
+
+Filesystem이 나온 이융
+저장 장치에 파일을 썼다 지웠다하게 되면 Fragmentaion이 발생하게 된다. 새로운 파일이 생성될 때 디스크의 빈 공간을 찾아서 쓰게 되는데 나중에는 하나의 파일이 연속적인 
+디스크 공간에 있지 않게 된다. 그렇게 되면 Disk seek time이 더욱 많이 발생하게 된다. -> 새로운 알고리즘 등장
+
+Unix에서 있어서 File은 모든 바이트들이 논리적으로 한줄로 연결된 것 처럼 인식하게 한다. 
+
+
+
+## 02.19
+- fsstat
+
+
+`system.fsstat.count`
+`system.fsstat.total_files`
+`system.fsstat.total_size.free`
+`system.fsstat.total_size.used`
+`system.fsstat.total_size.total`
+
+
+섹션	수집항목	 실제데이터 		 계산값 
+fsstat	system.fsstat.count	89		
+fsstat	system.fsstat.total_files	59544532		
+fsstat	system.fsstat.total_size.free	 246,309,601,280 		
+fsstat	system.fsstat.total_size.used	 631,553,163,264 		
+fsstat	system.fsstat.total_size.total	 877,862,764,544 	total = free + used	 877,862,764,544 
+
+
+fsstat은 호스트가 가지고 있는 디스크와 연결된 모든 파일 시스템에 대한 통계를 보여준다.
+각 디스크에 대해서 구할 수가 있으며 filesystem 자체는 성능에 대한 이슈와 상관 없을 것을 보인다.
+
+확인해보아야할 것
+- filesystem 섹션을 통해서 각각의 시스템을 구할 수 있고 이를 통해서 통계적인 것도 확인할 수 있다.
+- 이것이 모두 통합된 것이 필요할 것인가? 아니면 es에서 sum을 하는 게 나을 것인가ㅐ
+
+- uptime
+
+```json
+{
+   "system" : {
+     "uptime" : {
+       "duration" : {
+         "ms" : 7506965000
+       }
+     }
+   }
+}
+```
+
+
+
+
+
+- process
+- process.summary
+  
+
+```json
+{
+  "system" : {
+    "process" : {
+      "summary" : {
+        "zombie" : 0,
+        "running" : 0,
+        "stopped" : 0,
+        "sleeping" : 753,
+        "unknown" : 0,
+        "idle" : 183,
+        "dead" : 0,
+        "total" : 936
+      }
+    }
+  }
+}
+```
+
+
+```json
+GET sym-metric-process_summary-2021-02-19/_search
+{
+  "size": 20,
+  "query": {
+    "bool": {
+      "must": [
+        { "terms": {
+          "metricset.name": ["process_summary"]}},
+        { "match": {
+          "host.hostname": "dev-controller"
+          }
+        }
+      ]
+    }
+  }
+}
+```

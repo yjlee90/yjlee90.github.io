@@ -49,3 +49,44 @@ pip uninstall jedi
 
 
 
+
+## 테마 세팅
+```shell
+jt -t chesterish -f roboto -fs 12 -altmd -tfs 12 -nfs 125 -cellw 80% -T -N -vim
+```
+`-t` : 테마 이름
+`-f` : 폰트 설정
+`-fs` : 폰트 사이즈
+`-tfs` : 마크다운 폰트 사이즈
+`-nfs` : 노트북 메뉴 폰트 사이즈
+`-cellw` : 셀 가로 길이 %
+`-T` : 툴바표시
+`-N` : 파일 제목 표시
+
+
+Usage help	-h	–
+List Themes	-l	–
+Theme Name to Install	-t	–
+Code Font	-f	–
+Code Font-Size	-fs	11
+Notebook Font	-nf	–
+Notebook Font Size	-nfs	13
+Text/MD Cell Font	-tf	–
+Text/MD Cell Fontsize	-tfs	13
+Pandas DF Fontsize	-dfs	9
+Output Area Fontsize	-ofs	8.5
+Mathjax Fontsize (%)	-mathfs	100
+Intro Page Margins	-m	auto
+Cell Width	-cellw	980
+Line Height	-lineh	170
+Cursor Width	-cursw	2
+Cursor Color	-cursc	–
+Alt Prompt Layout	-altp	–
+Alt Markdown BG Color	-altmd	–
+Alt Output BG Color	-altout	–
+Style Vim NBExt*	-vim	–
+Toolbar Visible	-T	–
+Name & Logo Visible	-N	–
+Kernel Logo Visible	-kl	–
+Reset Default Theme	-r	–
+Force Default Fonts	-dfonts	–
