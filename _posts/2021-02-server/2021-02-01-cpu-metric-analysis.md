@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "CPP 모니터링 Metric 분석"
+title:      "CPU 모니터링 Metric 분석"
 subtitle:   ""
 date:       2021-02-04 15:30:00
 author:     "YooJong"
@@ -23,19 +23,15 @@ tags:
 
 Time(s) = Ticks / CLOCK_PER_SEC = Ticks / CPU_FREQUENCIES
 
-예)
-|CPU frequency(hz)|1 Clock 시간(s)| CPU Ticks | CPU 시간|
-|----|----|----|----|
-| 100 | 0.01 | 30 | 0.3|
-
-
+| CPU frequency(hz) | 1 Clock 시간(s) | CPU Ticks | CPU 시간 |
+| ----------------- | --------------- | --------- | -------- |
+| 100               | 0.01            | 30        | 0.3      |
 
 **pct**
 - 모든 core에 대하여 해당 메트릭의 비율(%)
 
 **norm**
 - pct 값을 core 수로 나누어서 normalized 된 값을 구함
-
 
 
 # 분석
@@ -163,7 +159,8 @@ Time(s) = Ticks / CLOCK_PER_SEC = Ticks / CPU_FREQUENCIES
     }
 }
 ```
-
+<br>
+<br>
 
 ## 항목별 상세
 
