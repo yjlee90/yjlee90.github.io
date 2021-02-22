@@ -1,7 +1,7 @@
 ---
 layout:     post
-title:      "서버 모니터링 중요 지표"
-subtitle:   "for performance"
+title:      "CPP 모니터링 Metric 분석"
+subtitle:   ""
 date:       2021-02-04 15:30:00
 author:     "YooJong"
 header-img: "img/post-bg-cpu.jpg"
@@ -13,11 +13,7 @@ tags:
     - CPU
 ---
 
-서버 모니터링에서 가장 중요한 CPU Metric에 대해서 조사하고 분석한다.
-CPU의 동작방식과 운영체제 속에서 CPU가 어ㄸ엏게 상호작용하는 지에 대
-Metric을 이용해서 CPU의 동작 방식을 이해 한다.
-
-Metric 수집 방식은 Elastic사에서 사용하는 Metric beats를 이용하여 Elastic Search 로 수집한다. 
+서버 모니터링에서 가장 중요한 CPU Metric에 대해서 조사하고 분석한다. CPU의 동작방식과 운영체제 속에서 CPU가 어떻게 상호작용하는 지에 대해 Metric을 이용해서 CPU의 동작 방식을 이해 한다. Metric 수집 방식은 Elastic사에서 사용하는 Metric beats를 이용하여 Elastic Search 로 수집한다. 
 
 # 사전지식
 
@@ -27,7 +23,7 @@ Metric 수집 방식은 Elastic사에서 사용하는 Metric beats를 이용하�
 
 Time(s) = Ticks / CLOCK_PER_SEC = Ticks / CPU_FREQUENCIES
 
-ㅇㅖ)
+예)
 |CPU frequency(hz)|1 Clock 시간(s)| CPU Ticks | CPU 시간|
 |----|----|----|----|
 | 100 | 0.01 | 30 | 0.3|
@@ -39,9 +35,6 @@ Time(s) = Ticks / CLOCK_PER_SEC = Ticks / CPU_FREQUENCIES
 
 **norm**
 - pct 값을 core 수로 나누어서 normalized 된 값을 구함
-
-
-
 
 
 
@@ -361,28 +354,21 @@ func cpuPercentages(s0, s1 *sigar.Cpu, numCPU int) Percentages {
 ```
 
 CPU Percentage 값에 대해서 어ㄸ언 식으로 구하는 지 살펴보자.
-Sigar(System Information Gatherer and Reporter) 라이브러리를 이용해서 가져온 객체(s0, s1)을 `calculatePct` 함수에 넣고 이ㅆ다. Sigar 객체에는 `user`, `sys`, `idle` 등 앞서 살펴본 메트릭에 대한 관찰 시점의 값을 가지고 이ㅆ다. 관찰된 두 개의 값의 변화량을 관찰 시점에 차이인 시간의 변화량으로 계산을 하고 이ㅆ다.
+Sigar(System Information Gatherer and Reporter) 라이브러리를 이용해서 가져온 객체(s0, s1)을 `calculatePct` 함수에 넣고 이ㅆ다. Sigar 객체에는 `user`, `sys`, `idle` 등 앞서 살펴본 메트릭에 대한 관찰 시점의 값을 가지고 있다. 관찰된 두 개의 값의 변화량을 관찰 시점에 차이인 시간의 변화량으로 계산을 하고 있다. 
 
-즉, CPU Metric(%) = New CpuMetricValue - Old CpuMetricValue  / New timeStamp - Old timeStamp * 100 으로 계산 할 수이이다. 
+즉, CPU Metric(%) = New CpuMetricValue - Old CpuMetricValue  / New timeStamp - Old timeStamp * 100 으로 계산 할 수 있다.
 
-여기서 CPU와 관련된 시간에 대해서 궁금하다. 관찰 시점은 어ㄸㅓㅎ게 정의 되는가?
-CPU tick 값을 통해서 확인할 수 이어어다, 
+여기서 CPU와 관련된 시간에 대해서 궁금하다. 관찰 시점은 어떻게 정의 되는가? CPU tick 값을 통해서 확인할 수 있다.
 
-CPU는 Clock cycle을 가지면서 진동을 하면서 처리를 하는 것으로 알려져이ㅇㅆ다. 
-간단하게 0과 1을 한번 하는 것을 하나의 tick이라고 해ㅆ을 ㄸㅐ 이 tick을 시간 값으로 변환된다. 
-바로 1/f 가 바로 1 tickㅇㅔ 거릴는 시간이다.
+CPU는 Clock cycle을 가지면서 진동을 하면서 처리를 하는 것으로 알려져있다. 
+간단하게 0과 1을 한번 하는 것을 하나의 tick이라고 했을 때 이 tick을 시간 값으로 변환된다. 
+바로 1/f 가 바로 1 tick에  걸리는 시간이다.
 
-ㅇㅖ를 들면 100Hz의 CPU는 1 tick에 0.01초가 걸리는 셈이다.
+예를 들면 100Hz의 CPU는 1 tick에 0.01초가 걸리는 셈이다.
 
-
-수집된 Metric을 확인해보면 ticks 값도 같이 수집되어 이ㅆ는 걸 확인할 수 이이다. 
-이는 timedelta에 대한 값으로 볼 수 이이다.
-수집 대상 호스트의 CPU frequency 값을 안다면 Percentage를 ㄱㅖㅅㅏㄴ하기 위해서 사용된 시간 값을 알 수 이이다.
+수집된 Metric을 확인해보면 ticks 값도 같이 수집되어 있는 걸 확인할 수 이이다. 이는 timedelta에 대한 값으로 볼 수 있다. 수집 대상 호스트의 CPU frequency 값을 안다면 Percentage를 계산하기 위해서 사용된 시간 값을 알 수 있다.
 
 > Core, Thread 등에 대해서는 전혀 고민하지 않은 개념적인 것만 확인한 것임
-
-
-
 
 
 # 참조
