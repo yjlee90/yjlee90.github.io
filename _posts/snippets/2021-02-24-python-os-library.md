@@ -4,7 +4,7 @@ title:      "Python OS 관련 라이브러리 정리"
 subtitle:   "Snippets"
 date:       2021-02-04 15:30:00
 author:     "YooJong"
-header-img: "img/post-bg-web.jpg"
+header-img: "img/post-bg-sourcecode.jpg"
 catalog: true
 tags:
     - Python
