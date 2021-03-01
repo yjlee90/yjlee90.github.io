@@ -16,17 +16,17 @@ tags:
 ---
 
 
-# 1. 개요
+# 1. Introduction
+사내에서 데이터 분석을 하기 위해서 Hadoop 클러스터를 구성하였다. 클라우드 프로바이더에서 Hadoop 서비스를 제공하긴 하지만 아직까지는 그렇게 자유롭게 사용할 수가 없기도 하고 여태까지 하던 짓이 이런 구축이라 빠르게 구축을 해보았다. 
 
-Hadoop 설치 방법 3가지
+Hadoop은 설치 방법이 3가지가 있다. 
 - Standalone
 - Pseudo distributed
 - Full distributed
 
-적용 방법
-- 오픈스택 위 가상머신 4대 Full Distributed
+이번에 설치할 때에는 오픈스택 가상머신 4대를 활용하여 Full Distributed 방식으로 설치하여 Hadoop 본연의 목적대로 사용해보고자 한다.
 
-# 2. Hadoop Cluster구성
+# 2. Hadoop Cluster 
 ## 2.1 서버 정보
 
 - Ubuntu 18.04
@@ -37,7 +37,8 @@ Hadoop 설치 방법 3가지
 ## 2.2 클러스터 정보
 
 ### 2.2.1 네트워크
-![cluster-network](img/in-post/post-202102/hadoop-cluster-arch.png)
+
+<img class="shadow" src="/img/in-post/post-202102/hadoop-cluster-arch.png" width="500">
 
 ### 2.2.2 서버구성
 - hadoop-cluster-1
@@ -51,12 +52,13 @@ Hadoop 설치 방법 3가지
 
 ### 2.2.3 소프트웨어 정보
 
-|adf| adf|
+|S/W| Verison|
 |---|----|
 |java| openjdk-1.8.0_275 |
 |python| 3.6.9|
 |Hadoop|3.2.2|
 |Spark|2.4.7|
+|Zeppelin|0.9|
 
 ## 3. 사전 구성
 
@@ -141,9 +143,6 @@ ssh-copy-id hadoop-cluster-4
 
 - `ssh hadoop-cluster-2`를 했을 때 비밀번호없이 접속이 가능한 지 확인한다.
 
-
-
-
 ## 3.4 Hadoop 설치 및 설정
 Hadoop은 Master에서 설정을 마친 후에 나머지 Node에 설정파일을 전달하는 방식으로 한다.
 
@@ -169,14 +168,13 @@ Hadoop 설정
 ### 3.4.2 
 
 ### 3.4.3 sync용 쉘스크립트
-
 ```shell
 ```
 
 
 
 
-## 3.4.3 Hadoop 클러스터 배포
+### 3.4.3 Hadoop 클러스터 배포
 
 
 
