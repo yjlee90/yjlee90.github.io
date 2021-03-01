@@ -611,3 +611,36 @@ GET sym-metric-process_summary-2021-02-19/_search
   }
 }
 ```
+
+
+## 02.22
+- Core Metric 분석
+- Locust를 활용한 부하 테스트 
+- 테스트용 어플리케이션
+
+## 02.23
+- Locust Sample 코드 작성
+- Elastic Search - Spark 연동
+
+## 02.24
+- Hadoop zeppelin에서 pyspark, ES와 연동
+- 실제 Metric 데이터 확인
+- Python Directory 구조 생성 
+- Jupyter notebook을 이용한 Spark job 개발 환경 구축k
+
+
+## 02.26
+- PySpark Template Code 작성
+- 공통 모듈 작성
+- 부하 테스트 실행하기
+
+
+
+
+## Sample Test
+1. MariaDB 외부 설정 
+- `/etc/mysql/mariadb.conf.d/50-server.conf` 에서 bind-address 주석 처리
+- `root` 계정 0.0.0.0으로 열기
+- `GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root';`
+- `FLUSH PRIVILEGES;`
+

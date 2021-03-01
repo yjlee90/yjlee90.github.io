@@ -4,7 +4,7 @@ title:     "2021.03 GrowthLog"
 subtitle:   ""
 date:       2021-03-01 15:30:00
 author:     "YooJong"
-header-img: https://miro.medium.com/max/700/1*GVnDjCJbDMP2HhxUAOYhkg.jpeg"
+header-img: "https://t1.daumcdn.net/cfile/tistory/225E1E3958E60FCD03"
 catalog: true
 tags:
     - 2021 
