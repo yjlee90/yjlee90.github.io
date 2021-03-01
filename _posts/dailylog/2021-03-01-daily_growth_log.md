@@ -4,7 +4,7 @@ title:     "2021.03 GrowthLog"
 subtitle:   ""
 date:       2021-03-01 15:30:00
 author:     "YooJong"
-header-img: "https://t1.daumcdn.net/cfile/tistory/225E1E3958E60FCD03"
+header-img: "img/background/post-bg-cherry-blossom.jpg"
 catalog: true
 tags:
     - 2021 

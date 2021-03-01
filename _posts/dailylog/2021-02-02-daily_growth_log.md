@@ -4,7 +4,7 @@ title:     "2021.02 GrowthLog"
 subtitle:   ""
 date:       2021-01-28 15:30:00
 author:     "YooJong"
-header-img: "img/post-bg-infinity.jpg"
+header-img: "img/background/post-bg-infinity.jpg"
 catalog: true
 tags:
     - 2021 

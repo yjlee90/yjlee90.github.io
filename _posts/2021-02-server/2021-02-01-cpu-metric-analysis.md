@@ -4,7 +4,7 @@ title:      "CPU 모니터링 Metric 분석"
 subtitle:   ""
 date:       2021-02-04 15:30:00
 author:     "YooJong"
-header-img: "img/post-bg-cpu.jpg"
+header-img: "img/background/post-bg-cpu.jpg"
 catalog: true
 tags:
     - Monitoring 
