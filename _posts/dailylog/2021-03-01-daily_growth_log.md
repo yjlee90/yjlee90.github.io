@@ -14,5 +14,14 @@ tags:
 ### 03.01
 - Locust test script 개발
 
-
 ### 03.02
+- PySpark ES ETL 샘플 코드 개발
+- Locust test script 개발
+
+
+nginx 튜닝
+
+```
+prlimit --nofile --output RESOURCE,SOFT,HARD --pid 6296
+
+```
