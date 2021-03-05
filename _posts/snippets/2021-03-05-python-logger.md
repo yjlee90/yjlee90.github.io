@@ -22,7 +22,7 @@ logger = logging.getLogger(__name__)
 # Formatter
 simple_formatter = logging.Formatter("[%(name)s] %(message)s")
 complex_formatter = logging.Formatter(
-    "%(asctime)s %(levelname)s [%(name)s] [%(filename)s:%(lineno)d] - %(message)s"
+"%(asctime)s %(levelname)s [%(name)s] [%(filename)s:%(lineno)d] - %(message)s"
 )
 
 # File Handler Logging 
@@ -32,7 +32,10 @@ log_dir = './logs'
 if not os.path.exists(log_dir):
     os.mkdir(log_dir)
 
-file_handler= TimedRotatingFileHandler(filename='./logs/errors.log', when='midnight', interval=1, encoding='utf-8')
+file_handler= TimedRotatingFileHandler(filename='./logs/errors.log', \ 
+                                       when='midnight',\
+                                       interval=1,\
+                                       encoding='utf-8')
 file_handler.setFormatter(complex_formatter)
 file_handler.suffix = '%Y%m%d'
 file_handler.setLevel(logging.ERROR)
