@@ -2,7 +2,7 @@
 layout:     post
 title:      "Python Logging Snippet"
 subtitle:   "Snippets"
-date:       2021-02-04 15:30:00
+date:       2021-03-05 15:30:00
 author:     "YooJong"
 header-img: "img/background/post-bg-sourcecode.jpg"
 catalog: true
